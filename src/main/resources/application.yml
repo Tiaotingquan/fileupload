@@ -1,0 +1,45 @@
+spring:
+  datasource:
+    password: 123456
+    url: jdbc:mysql://localhost:3306/fileupload?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+#  用于配置redis缓存，减少数据库查询的压力
+#  redis:
+#    host: 139.155.4.48
+#    port: 6379
+#    password: taotingquan1314
+#    database: 1
+#    &serverTimezone=UTC
+#在这里已经将数据转为UTF-8的数据了
+#mybatis:
+#  mapper-locations: classpath:mappers/*.xml
+#  配置忽略驼峰，忽略大小写
+#  configuration:
+#  map-underscore-to-camel-case: false
+#  配置全局表主键使用雪花ID
+#  指定Mybatis-plus的xml文件
+mybatis-plus:
+  mapper-locations: classpath:mappers/*.xml
+  #消除驼峰命名法
+  configuration:
+    map-underscore-to-camel-case: false
+    cache-enabled: false
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #  配置主键是用UUTD,添加时自动生成UUID向数据库中插入数据
+  global-config:
+    db-config:
+      id-type: assign_id
+      # auto自增，当数据库中对应字段设置不是自增，无效
+      # assign_id，生成雪花ID，主键类型是String/Number
+      # assign_uuid，生成UUID 主键类型是String
+# 配置SWagger用于测试
+swagger:
+  enabled: true
+  base-package: com.ttq.controller
+  title: TSLY
+  description: CD ETIME
+# 配置客户端访问端口
+server:
+  port: 8080

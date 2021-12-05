@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ttq.dao.FileMapper" >
+  <resultMap id="BaseResultMap" type="com.ttq.pojo.File" >
+    <id column="FileId" property="fileid" jdbcType="VARCHAR" />
+    <result column="OldFileName" property="oldfilename" jdbcType="VARCHAR" />
+    <result column="FileType" property="filetype" jdbcType="VARCHAR" />
+    <result column="FileSize" property="filesize" jdbcType="VARCHAR" />
+    <result column="CreateTime" property="createtime" jdbcType="DATE" />
+    <result column="FileAddress" property="fileaddress" jdbcType="VARCHAR" />
+    <result column="FileNmae" property="filenmae" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FileId, OldFileName, FileType, FileSize, CreateTime, FileAddress, FileNmae
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from file
+    where FileId = #{fileid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from file
+    where FileId = #{fileid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.ttq.pojo.File" >
+    insert into file (FileId, OldFileName, FileType,
+      FileSize, CreateTime, FileAddress,
+      FileNmae)
+    values (#{fileid,jdbcType=VARCHAR}, #{oldfilename,jdbcType=VARCHAR}, #{filetype,jdbcType=VARCHAR},
+      #{filesize,jdbcType=VARCHAR}, #{createtime,jdbcType=DATE}, #{fileaddress,jdbcType=VARCHAR},
+      #{filenmae,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ttq.pojo.File" >
+    insert into file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileid != null" >
+        FileId,
+      </if>
+      <if test="oldfilename != null" >
+        OldFileName,
+      </if>
+      <if test="filetype != null" >
+        FileType,
+      </if>
+      <if test="filesize != null" >
+        FileSize,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="fileaddress != null" >
+        FileAddress,
+      </if>
+      <if test="filenmae != null" >
+        FileNmae,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileid != null" >
+        #{fileid,jdbcType=VARCHAR},
+      </if>
+      <if test="oldfilename != null" >
+        #{oldfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="filetype != null" >
+        #{filetype,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null" >
+        #{filesize,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=DATE},
+      </if>
+      <if test="fileaddress != null" >
+        #{fileaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="filenmae != null" >
+        #{filenmae,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ttq.pojo.File" >
+    update file
+    <set >
+      <if test="oldfilename != null" >
+        OldFileName = #{oldfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="filetype != null" >
+        FileType = #{filetype,jdbcType=VARCHAR},
+      </if>
+      <if test="filesize != null" >
+        FileSize = #{filesize,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=DATE},
+      </if>
+      <if test="fileaddress != null" >
+        FileAddress = #{fileaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="filenmae != null" >
+        FileNmae = #{filenmae,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FileId = #{fileid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ttq.pojo.File" >
+    update file
+    set OldFileName = #{oldfilename,jdbcType=VARCHAR},
+      FileType = #{filetype,jdbcType=VARCHAR},
+      FileSize = #{filesize,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=DATE},
+      FileAddress = #{fileaddress,jdbcType=VARCHAR},
+      FileNmae = #{filenmae,jdbcType=VARCHAR}
+    where FileId = #{fileid,jdbcType=VARCHAR}
+  </update>
+</mapper>
